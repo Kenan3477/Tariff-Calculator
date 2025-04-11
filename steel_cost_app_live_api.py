@@ -4,15 +4,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import requests
 import hashlib
-import streamlit_authenticator as stauth
+from streamlit_authenticator.utilities.hasher import Hasher
 
 st.set_page_config(page_title="Steel Tariff Estimator", page_icon="🔩", layout="centered")
 
 # ✅ Hardcoded credentials with manual SHA256 hashing
 names = ["Kenan Davies"]
+names = ["Kenan Davies"]
 usernames = ["kenan"]
 passwords = ["admin123"]
-hashed_passwords = [hashlib.sha256(p.encode()).hexdigest() for p in passwords]
+hashed_passwords = [Hasher.hash(pwd) for pwd in passwords]
 
 credentials = {
     "usernames": {
