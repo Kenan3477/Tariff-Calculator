@@ -91,18 +91,20 @@ if uploaded_file:
         st.pyplot(fig)
 
         alt_sources = alternatives.get(row["Product Type"])
-        if alt_sources:
-            current_tariff = row["Tariff Rate (%)"]
-            sorted_alts = sorted(alt_sources, key=lambda x: x["Tariff"])
-            lowest_tariff = sorted_alts[0]["Tariff"]
-            st.markdown("**💡 Alternative sources with potential savings:**")
-            for alt in sorted_alts:
-                savings = max(0, (current_tariff - alt["Tariff"]) / 100 * row["Base Cost (£)"])
-                flag = "🌟 Recommended" if alt["Tariff"] == lowest_tariff else ""
-                st.markdown(
-                    f"- [{alt['Supplier']}]({alt['URL']}) from {alt['Country']} → {alt['Tariff']}% tariff {flag}"
-                    + (f" → 💰 Savings: £{savings:,.2f}" if savings > 0 else "")
-                )
+alt_sources = alternatives.get(row["Product Type"])
+if alt_sources:
+    current_tariff = row["Tariff Rate (%)"]
+    sorted_alts = sorted(alt_sources, key=lambda x: x["Tariff"])
+    lowest_tariff = sorted_alts[0]["Tariff"]
+    st.markdown("**💡 Alternative sources with potential savings:**")
+    for alt in sorted_alts:
+        savings = max(0, (current_tariff - alt["Tariff"]) / 100 * row["Base Cost (£)"])
+        flag = "🌟 Recommended" if alt["Tariff"] == lowest_tariff else ""
+        st.markdown(
+            f"- [{alt['Supplier']}]({alt['URL']}) from {alt['Country']} → {alt['Tariff']}% tariff {flag}"
+            + (f" → 💰 Savings: £{savings:,.2f}" if savings > 0 else "")
+        )
+       
             current_tariff = row["Tariff Rate (%)"]
             sorted_alts = sorted(alt_sources, key=lambda x: x["Tariff"])
             lowest_tariff = sorted_alts[0]["Tariff"]
