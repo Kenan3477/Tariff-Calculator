@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -22,6 +21,7 @@ credentials = {
     }
 }
 
+# ✅ This is the line that was missing a closing parenthesis
 authenticator = Authenticate(credentials, "tariff_auth", "auth_cookie")
 name, authentication_status, username = authenticator.login("Login", location="main")
 
